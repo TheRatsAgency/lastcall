@@ -10,6 +10,16 @@
       // over the number of places that show.
       var placeMarkers = [];
 
+      // Find user Pos by HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude, lng: position.coords.longitude
+            };
+
+          });
+        }
+
       function initMap() {
         // Create a styles array to use with the map.
         var styles = [
@@ -81,7 +91,7 @@
 
         // Constructor creates a new map - only center and zoom are required.
         map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 40.7413549, lng: -73.9980244},
+          center: {lat: 37.495650, lng: -122.496639},
           zoom: 13,
           styles: styles,
           mapTypeControl: false
@@ -211,6 +221,8 @@
           polygon.getPath().addListener('insert_at', searchWithinPolygon);
         });
       }
+
+      map.setCenter('pos');
 
       // This function populates the infowindow when the marker is clicked. We'll only allow
       // one infowindow which will open at the marker that is clicked, and populate based
